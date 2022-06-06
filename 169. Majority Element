@@ -1,0 +1,47 @@
+Problem:
+
+Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
+
+You may assume that the array is non-empty and the majority element always exist in the array.
+
+Thoughts:
+Use a counter for currently met element. Since the major element will eventually win no matter where it starts.
+
+Solutions:
+public class Solution {
+    public int majorityElement(int[] num) {
+        int candidate = num[0];
+        int counter = 1;
+        for (int i = 1; i < num.length; i ++){
+            if (counter == 0){
+                candidate = num[i];
+                counter = 1;
+            }
+            else{
+                if (num[i] == candidate)
+                    counter ++;
+                else
+                    counter --;
+            }
+        }//for i
+        return candidate;
+    }
+}
+
+
+
+My goal is to join Google
+
+You'll get all the deep information in this solution.
+
+I started coding at 14 years old in 2015. I'm the Founder & CEO of Starnote English School where more than 5 million students are learning English and a Partner of Softlab IT where 65+ Software Engineers are working together. I made 10 Android apps and 20+ websites but I've more than 6 years of working experience as a Software Engineer.
+
+Let's connect If you have any opportunity or meaningful relationship.
+
+Personal Info:
+Ariful Islam
++8801716299426
+arifulislamblue.com
+github.com/arifulislamblue
+arifulislamblue@gmail.com
+linkedIn.com/in/arifulislamblue
