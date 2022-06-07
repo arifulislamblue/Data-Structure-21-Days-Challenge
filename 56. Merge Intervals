@@ -16,36 +16,35 @@ Solutions:
  * }
  */
  
-public class Solution {
-    public List<Interval> merge(List<Interval> intervals) {
-        Collections.sort(intervals, new Comparator<Interval>(){
-            public int compare(Interval i1, Interval i2) {
-                if (i1.start != i2.start) {
-                    return i1.start - i2.start;
-                }
-                else {
-                    return i1.end - i2.end;
-                }
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        
+        if(intervals.length<=1) return intervals;
+        
+        List<int[]> mergedIntervals = new ArrayList<>();
+        
+        Arrays.sort(intervals, (arr1, arr2) -> Integer.compare(arr1[0], arr2[0]));
+        
+        int[] currentInterval = intervals[0];
+        
+        mergedIntervals.add(currentInterval);
+        
+        for(int[] interval: intervals){
+            int currentStart = currentInterval[0];
+            int currentEnd = currentInterval[1];
+            int newStart = interval[0];
+            int newEnd = interval[1];
+            
+            if(currentEnd>=newStart){
+                currentInterval[1] = Math.max(currentEnd, newEnd);
+            }else{
+                currentInterval = interval;
+                mergedIntervals.add(currentInterval);
             }
-        });
-        List<Interval> result = new LinkedList<Interval>();
-        Interval curr = null;
-        for (Interval inter:intervals) {
-            if (curr == null) {
-                curr = inter;
-                continue;
-            }
-            if (inter.start > curr.end) {
-                result.add(curr);
-                curr = inter;
-            }
-            else {
-                curr.end = Math.max(curr.end, inter.end);
-            }
+            
         }
-        if (curr != null) {
-            result.add(curr);
-        }
-        return result;
+        
+        
+        return mergedIntervals.toArray(new int[mergedIntervals.size()][]);
     }
 }
